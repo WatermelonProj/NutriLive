@@ -248,9 +248,9 @@ class CardapioController extends Controller
 
         // enquanto não fechar o mês continuar, caso seja o fim dem uma semana adicionar outro indice na array de somas
         $semanas =
-                ['Semana 1' =>  $somaNutrientesDiarios, 'Semana 2' =>  $somaNutrientesDiarios,
-                'Semana 3' =>  $somaNutrientesDiarios, 'Semana 4' =>  $somaNutrientesDiarios,
-                'Semana 5' =>  $somaNutrientesDiarios, 'Semana 6' =>  $somaNutrientesDiarios];
+            ['Semana 1' => $somaNutrientesDiarios, 'Semana 2' => $somaNutrientesDiarios,
+                'Semana 3' => $somaNutrientesDiarios, 'Semana 4' => $somaNutrientesDiarios,
+                'Semana 5' => $somaNutrientesDiarios, 'Semana 6' => $somaNutrientesDiarios];
         $cardapios = [];
 
         while (!$diaAtual->isNextMonth()) {

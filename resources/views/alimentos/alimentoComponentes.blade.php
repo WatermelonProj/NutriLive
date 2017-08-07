@@ -182,6 +182,8 @@
                     </div>
                 </div>
             </div>
+
+            {{--rodar o artisan storage:link--}}
             {{--Imagem do alimento--}}
             @if(File::exists("storage/alimentos/{$alimento->idAlimento}.png") xor
                     File::exists("storage/alimentos/{$alimento->idAlimento}.jpg"))
@@ -224,7 +226,7 @@
             Morris.Donut({
                 element: 'graph_donut',
                 data: {!! grafoComposicao($alimento->nutrienteAlimento) !!},
-                colors: shuffle(['#26B99A', '#34495E', '#ACADAC', '#3498DB', '#ff4852', '#66ffff', '#99cc00']),
+                colors: shuffle(['#26B99A', '#34495E', '#ACADAC', '#3498DB', '#ff4852', '#78ff58', '#3a55cc']),
                 formatter: function (y) {
                     return y + "%";
                 },

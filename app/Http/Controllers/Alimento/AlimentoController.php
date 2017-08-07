@@ -142,7 +142,6 @@ class AlimentoController extends Controller
         $nutrientesAlimento = $alimento->nutrienteAlimento;
         $medidasAlimento = $alimento->alimentoMedidaCaseira;
 
-
         // pega todos os nutrientes e medidas que um alimento possui para passar para a view
         $nutrientesContidos = $nutrientesAlimento->map(function ($ntr) {
             return $ntr->idNutriente;

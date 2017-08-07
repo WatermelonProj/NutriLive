@@ -20,7 +20,6 @@
 @section('table_body')
     @foreach($cardapios as $index => $cardapio)
         <?php $nutrientes = $cardapio->getTotalNutrientes() ?>
-        {{ dump($nutrientes) }}
         <tr>
             <td>{{ toCarbon($cardapio->dataUtilizacao)->format('d/m/y') }}</td>
             <td>

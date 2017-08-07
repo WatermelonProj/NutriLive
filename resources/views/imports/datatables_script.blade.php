@@ -58,7 +58,18 @@
         }();
 
         $('#datatable').dataTable({
-            format:    'DD-MM-YYYY'
+            format:    'DD-MM-YYYY',
+            "language": {
+                "lengthMenu": "Exibir _MENU_ entradas",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "search:": 'Buscar',
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Anterior"
+                },
+            }
         });
         $('#datatable-keytable').DataTable({
             keys: true

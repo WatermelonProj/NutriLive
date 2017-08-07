@@ -49,7 +49,7 @@ class Alimento extends Model
 
     public function alimentoMedidaCaseira()
     {
-        return $this->hasMany('App\Models\Alimento\alimentoMedidaCaseira', 'idAlimento');
+        return $this->hasMany('App\Models\Alimento\AlimentoMedidaCaseira', 'idAlimento');
     }
 
 }

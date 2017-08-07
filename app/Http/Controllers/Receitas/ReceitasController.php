@@ -147,6 +147,8 @@ class ReceitasController extends Controller
      */
     public function edit($id)
     {
+        // todo carregar as quantidades de alimentos na view ao editar
+
         $receita = Receita::find($id);
         $alimentosLista = Alimento::where('ativoAlimento', 1)->get()->toArray();
         $alimentosLista = array_pluck($alimentosLista, 'descricaoAlimento', 'idAlimento');

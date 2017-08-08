@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alimento\Alimento;
+use App\Models\Cardapio\Cardapio;
+use App\Models\Receita\Receita;
+use App\Models\Refeicao\Refeicao;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalAlimentos = Alimento::all()->count();
+        $totalReceitas = Receita::all()->count();
+        $totalRefeicoes = Refeicao::all()->count();
+
+        $hoje = Carbon::now();
+        $cardapiosAgendados = Cardapio::whereDay('dataUtilizacao', '>=', $hoje->day)
+            ->whereMonth('dataUtilizacao', '=', $hoje->month)->count();
+
+        return view('home', compact('totalAlimentos', 'totalReceitas', 'totalRefeicoes',
+            'cardapiosAgendados'));
     }
 }

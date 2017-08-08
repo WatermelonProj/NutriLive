@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@index')->name('home');
+
 Auth::routes();
 
 Route::group(['prefix' => 'alimentos'], function () {
@@ -75,6 +77,3 @@ Route::group(['prefix' => 'cardapio'], function () {
     Route::get('/enable/{id}', 'Cardapio\CardapioController@enable')->name('cardapio.enable')->where('id', '[0-9]+')->middleware('auth');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');

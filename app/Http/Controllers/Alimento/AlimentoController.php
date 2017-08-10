@@ -41,7 +41,12 @@ class AlimentoController extends Controller
      */
     public function create()
     {
-        return view('alimentos.alimentosCriacao ');
+        $nutrientes = Nutriente::pluck('nomeNutriente', 'idNutriente');
+        foreach ($nutrientes as $index => $nutriente) {
+            $aux = Nutriente::where('nomeNutriente', $nutriente)->first()->unidadeMedida->siglaUnidade;
+            $nutrientes[$index] = $nutriente . " " . $aux;
+        }
+        return view('alimentos.alimentosCriacao ', compact('nutrientes'));
     }
 
     /**

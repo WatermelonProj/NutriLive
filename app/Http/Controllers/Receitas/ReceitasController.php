@@ -164,7 +164,7 @@ class ReceitasController extends Controller
 
         $alimentosContidos = $alimentosContidos->toArray();
         return view('receitas.receitaEditar', compact('receita', 'alimentosLista', 'alimentosContidos',
-            'alimentoReceita', 'tiposPorcao', 'faixas', 'receita_porcao'));
+            'alimentoReceita', 'tiposPorcao', 'faixas', 'receita_porcao', 'alimentosReceita'));
     }
 
     /**

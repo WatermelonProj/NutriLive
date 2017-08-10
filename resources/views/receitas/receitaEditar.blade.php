@@ -87,11 +87,27 @@
         </div>
     @endforeach
 
+    {{--Alimentos--}}
     <div class="clearfix"></div>
     <div class="ln_solid"></div>
     <h2>Alimentos
         <small>Insira as quantidades</small>
     </h2>
+    <div id="alm">
+        @foreach($alimentosReceita as $alimentoReceita)
+            <div class='form-group col-md-6 col-sm-6 col-xs-12'>
+                {!! Form::label('Alm-'.$alimentoReceita->idAlimento, $alimentoReceita->alimento->descricaoAlimento,
+                ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+                <div class='col-md-4 col-sm-4 col-xs-12'>
+                    {!! Form::text('Alm-'.$alimentoReceita->idAlimento, $alimentoReceita->qtde,
+                    ['type'=>'number', 'class'=>'form-control', 'step'=>'0.01', 'data-parsley'=>'number',
+                     'data-parsley-type-message'=>'Preencha com um valor numérico',
+                     'data-parsley-required'=>'data-parsley-required',
+                     'data-parsley-required-message'=>'Preencha este Campo!']) !!}
+                </div>
+            </div>
+        @endforeach
+    </div>
 
     <div id="alm"></div>
 
@@ -103,7 +119,7 @@
 
 @section('form_scripts')
     <script>
-        $('document').ready(addAlm);
+//        $('document').ready(addAlm);
         $('#mselect').change(addAlm);
 
         {{--adiciona dinâmicamente o campo para valores dos alimentos--}}

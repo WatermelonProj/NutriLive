@@ -23,7 +23,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             {!! Form::select('receitas[]', $receitas->pluck('nomeReceita', 'idReceita'), null,
             [ 'id'=>'mselect' ,'class'=>'form-control select2_multiple', 'multiple'=>true, 'multiple'=>'multiple',
-            'data-parsley-required', 'data-parsley-required-message' => "Insira ao menos uma receita"]) !!}
+            'data-parsley-required', 'data-parsley-required-message' => "Relação de Receitas"]) !!}
         </div>
     </div>
 

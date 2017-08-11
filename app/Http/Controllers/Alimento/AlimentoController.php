@@ -65,7 +65,7 @@ class AlimentoController extends Controller
                 'descricaoAlimento' => 'required',
                 'idGPiramide' => 'required|numeric',
                 'idGAlimentar' => 'required|numeric',
-                'idTACO' => 'numeric',
+//                'idTACO' => 'numeric',
             ]
 
         );
@@ -75,7 +75,7 @@ class AlimentoController extends Controller
         $alimento->descricaoAlimento = $request->descricaoAlimento;
         $alimento->grupoPiramide()->associate(GrupoPiramide::find($request->idGPiramide));
         $alimento->grupoAlimentar()->associate(GrupoAlimentar::find($request->idGAlimentar));
-        $alimento->idTACO = $request->idTACO;
+//        $alimento->idTACO = $request->idTACO;
         $alimento->save();
 
         // salvando a imagem
@@ -185,7 +185,7 @@ class AlimentoController extends Controller
         $alimento->descricaoAlimento = $request->descricaoAlimento;
         $alimento->grupoPiramide()->associate(GrupoPiramide::find($request->idGPiramide));
         $alimento->grupoAlimentar()->associate(GrupoAlimentar::find($request->idGAlimentar));
-        $alimento->idTACO = $request->idTACO;
+//        $alimento->idTACO = $request->idTACO;
         $alimento->save();
         // salvando a imagem
         if ($request->hasFile('image')) {
@@ -193,8 +193,8 @@ class AlimentoController extends Controller
         }
 
         // limpando dados antigos
-        DB::delete("delete FROM nutrientealimento WHERE idAlimento = ?", [$alimento->idAlimento]);
-        DB::delete("delete FROM alimento_medidacaseira WHERE idAlimento = ?", [$alimento->idAlimento]);
+        DB::delete("delete FROM nutrienteAlimento WHERE idAlimento = ?", [$alimento->idAlimento]);
+        DB::delete("delete FROM alimento_medidaCaseira WHERE idAlimento = ?", [$alimento->idAlimento]);
 
         // Editando um alimento
         foreach ($request->nutrientes as $nutriente) {

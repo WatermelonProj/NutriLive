@@ -57,13 +57,13 @@
                             {!! Form::select('idGAlimentar', \App\Models\Grupo\GrupoAlimentar::pluck('descricaoGA', 'idGAlimentar'), null, ['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('idTACO', 'ID TACO', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::text('idTACO', null, ['class'=>'form-control', 'data-parsley-type'=>"number",
-                             'data-parsley-type-message' => "Preencha com um valor númerico", 'data-parsley-required', 'data-parsley-required-message' => "Preencha este campo"]) !!}
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--{!! Form::label('idTACO', 'ID TACO', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}--}}
+                        {{--<div class="col-md-6 col-sm-6 col-xs-12">--}}
+                            {{--{!! Form::text('idTACO', null, ['class'=>'form-control', 'data-parsley-type'=>"number",--}}
+{{--                             'data-parsley-type-message' => "Preencha com um valor númerico", 'data-parsley-required', 'data-parsley-required-message' => "Preencha este campo"]) !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         {!! Form::label('nutrientes', 'Nutrientes', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -143,24 +143,26 @@
         {{-- adiciona dinâmicamente o campo para valores dos nutrientes --}}
         function addNutriente() {
             var nutrientes = $('#nutrienteSelect').find(":selected");
-            $('#ntr').empty();
+//            $('#ntr').empty();
             for (i = 0; i < nutrientes.length; i++) {
-                $('#ntr').append(
-                    "<div class=\'form-group col-md-6 col-sm-6 col-xs-12\'>" +
-                    "<label for=\'alimento\' class=\'control-label col-md-3 col-sm-3 col-xs-12\'>" + nutrientes[i].text + "</label>" +
-                    "<div class=\'col-md-4 col-sm-4 col-xs-12\'>" +
-                    "<input name=Ntr-" + nutrientes[i].value + " type=\'number\' class=\'form-control\' , step=\'0.01\', data-parsley=\'number\'" +
-                    "data-parsley-type-message=\'Preencha com um valor numérico\', " +
-                    "data-parsley-required=\'data-parsley-required\', data-parsley-required-message=\'Preencha este Campo!\'>" +
-                    "</div>"
-                );
+                if ($('#Ntr-' + nutrientes[i].value).length == 0) {
+                    $('#ntr').append(
+                        "<div id='Ntr-" + nutrientes[i].value + "' class=\'form-group col-md-6 col-sm-6 col-xs-12\'>" +
+                        "<label for=\'alimento\' class=\'control-label col-md-3 col-sm-3 col-xs-12\'>" + nutrientes[i].text + "</label>" +
+                        "<div class=\'col-md-4 col-sm-4 col-xs-12\'>" +
+                        "<input name=Ntr-" + nutrientes[i].value + " type=\'number\' class=\'form-control\' , step=\'0.01\', data-parsley=\'number\'" +
+                        "data-parsley-type-message=\'Preencha com um valor numérico\', " +
+                        "data-parsley-required=\'data-parsley-required\', data-parsley-required-message=\'Preencha este Campo!\'>" +
+                        "</div>"
+                    );
+                }
             }
         }
 
         {{-- adiciona dinâmicamente o campo para valores dos nutrientes --}}
         function addMedida() {
             var nutrientes = $('#medidaCaseiraSelect').find(":selected");
-            $('#mdcase').empty();
+//            $('#mdcase').empty();
             for (i = 0; i < nutrientes.length; i++) {
                 $('#mdcase').append(
                     "<div class='form-group col-md-6 col-sm-6 col-xs-12'>" +

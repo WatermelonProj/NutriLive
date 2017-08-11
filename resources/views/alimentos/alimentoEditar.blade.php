@@ -57,13 +57,13 @@
                             {!! Form::select('idGAlimentar', \App\Models\Grupo\GrupoAlimentar::pluck('descricaoGA', 'idGAlimentar'), $alimento->idGAlimentar, ['class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('idTACO', 'ID TACO', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::text('idTACO', $alimento->idTACO, ['class'=>'form-control', 'data-parsley-type'=>"number",
-                             'data-parsley-type-message' => "Preencha com um valor númerico", 'data-parsley-required', 'data-parsley-required-message' => "Preencha este campo"]) !!}
-                        </div>
-                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--{!! Form::label('idTACO', 'ID TACO', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}--}}
+                        {{--<div class="col-md-6 col-sm-6 col-xs-12">--}}
+                            {{--{!! Form::text('idTACO', $alimento->idTACO, ['class'=>'form-control', 'data-parsley-type'=>"number",--}}
+                             {{--'data-parsley-type-message' => "Preencha com um valor númerico", 'data-parsley-required', 'data-parsley-required-message' => "Preencha este campo"]) !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="form-group">
                         {!! Form::label('nutrientes', 'Nutrientes', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">

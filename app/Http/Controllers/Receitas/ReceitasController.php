@@ -180,7 +180,6 @@ class ReceitasController extends Controller
             'nomeReceita' => 'required',
         ]);
 
-
         $receita = Receita::find($id);
         $receita->nomeReceita = $request->nomeReceita;
         $receita->preparoReceita = $request->preparoReceita;
@@ -201,7 +200,7 @@ class ReceitasController extends Controller
             $alimentoReceita = new AlimentoReceita();
             $alimentoReceita->idAlimento = $alimento;
             $alimentoReceita->idReceita = $receita->idReceita;
-            $alimentoReceita->qtde = $request[$alimento];
+            $alimentoReceita->qtde = $request['Alm-'.$alimento];
             $alimentoReceita->unidadeMedida = 2;
             $alimentoReceita->save();
         }

@@ -83,6 +83,19 @@ class AlimentoController extends Controller
             $request->image->storeAs('public/alimentos', $alimento->idAlimento . ".png");
         }
 
+        // garantindo a energia = 0 pelo menos
+        $nutrienteAlm = new NutrienteAlimento();
+        $nutrienteAlm->alimento()->associate($alimento);
+        $nutrienteAlm->idNutriente = 1;
+        $nutrienteAlm->qtde = 0;
+        $nutrienteAlm->save();
+        $nutrienteAlm = new NutrienteAlimento();
+        $nutrienteAlm->alimento()->associate($alimento);
+        $nutrienteAlm->idNutriente = 2;
+        $nutrienteAlm->qtde = 0;
+        $nutrienteAlm->save();
+
+
         // Associando os nutrientes com o alimento criado previamente
         if ($request->nutrientes) {
             foreach ($request->nutrientes as $nutriente) {
@@ -195,6 +208,19 @@ class AlimentoController extends Controller
         // limpando dados antigos
         DB::delete("delete FROM nutrienteAlimento WHERE idAlimento = ?", [$alimento->idAlimento]);
         DB::delete("delete FROM alimento_medidaCaseira WHERE idAlimento = ?", [$alimento->idAlimento]);
+
+
+        // garantindo a energia = 0 pelo menos
+        $nutrienteAlm = new NutrienteAlimento();
+        $nutrienteAlm->alimento()->associate($alimento);
+        $nutrienteAlm->idNutriente = 1;
+        $nutrienteAlm->qtde = 0;
+        $nutrienteAlm->save();
+        $nutrienteAlm = new NutrienteAlimento();
+        $nutrienteAlm->alimento()->associate($alimento);
+        $nutrienteAlm->idNutriente = 2;
+        $nutrienteAlm->qtde = 0;
+        $nutrienteAlm->save();
 
         // Editando um alimento
         foreach ($request->nutrientes as $nutriente) {

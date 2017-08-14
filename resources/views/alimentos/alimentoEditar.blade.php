@@ -93,7 +93,7 @@
                     </h2>
                     <div id="ntr">
                         @foreach($nutrientesAlimento as $nutrienteAlimento)
-                            <div class='form-group col-md-6 col-sm-6 col-xs-12'>
+                            <div id="Nutriente-{{ $nutrienteAlimento->idNutriente }}" class='form-group col-md-6 col-sm-6 col-xs-12'>
                                 {!! Form::label('Ntr-'.$nutrienteAlimento->idNutriente, $nutriente->where('idNutriente', $nutrienteAlimento->idNutriente)->first()->nomeNutriente,
                                 ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                                 <div class='col-md-4 col-sm-4 col-xs-12'>
@@ -148,46 +148,43 @@
     @include('imports.parsley_script')
 
     <script>
-        //        $('document').ready(addNutriente);
-        //        $('document').ready(addMedida);
-        $('#nutrienteSelect').change(addNutriente);
-        $('#medidaCaseiraSelect').change(addMedida);
 
-        {{-- adiciona dinâmicamente o campo para valores dos nutrientes --}}
-        function addNutriente() {
-            var nutrientes = $('#nutrienteSelect').find(":selected");
-            $('#ntr').empty();
-            for (i = 0; i < nutrientes.length; i++) {
-                $('#ntr').append(
-                    "<div class='form-group col-md-6 col-sm-6 col-xs-12'>" +
-                    "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + nutrientes[i].text + "</label>" +
-                    "<div class='col-md-4 col-sm-4 col-xs-12'>" +
-                    "<input name=Ntr-" + nutrientes[i].value + " type='number' class='form-control', step='0.01', data-parsley='number'" +
-                    "data-parsley-type-message='Preencha com um valor numérico', " +
-                    "data-parsley-required='data-parsley-required', data-parsley-required-message='Preencha este Campo!'>" +
-                    "</div>" +
-                    "</div>"
-                );
-            }
-        }
+        var $eventSelect = $('#nutrienteSelect');
+        $eventSelect.on('select2:unselect', function(e) {
+            $("#Nutriente-"+ e.params.data.id).remove();
+        })
+        $eventSelect.on('select2:select', function(e) {
+//            console.log('select');
+//            console.log(e.params.data.id); //This will give you the id of the selected attribute
+//            console.log(e.params.data.text); //This will give you the text of the selected
+            $('#ntr').append(
+                "<div id=Nutriente-"+ e.params.data.id +" class='form-group col-md-6 col-sm-6 col-xs-12'>" +
+                "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +
+                "<div class='col-md-4 col-sm-4 col-xs-12'>" +
+                "<input name=Ntr-" + e.params.data.id + " type='number' class='form-control', step='0.01', data-parsley='number'" +
+                "data-parsley-type-message='Preencha com um valor numérico', " +
+                "data-parsley-required='data-parsley-required', data-parsley-required-message='Preencha este Campo!'>" +
+                "</div>" +
+                "</div>"
+            );
+        })
 
-        {{-- adiciona dinâmicamente o campo para valores dos nutrientes --}}
-        function addMedida() {
-            var nutrientes = $('#medidaCaseiraSelect').find(":selected");
-            $('#mdcase').empty();
-            for (i = 0; i < nutrientes.length; i++) {
-                $('#mdcase').append(
-                    "<div class='form-group col-md-6 col-sm-6 col-xs-12'>" +
-                    "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + nutrientes[i].text + "</label>" +
-                    "<div class='col-md-4 col-sm-4 col-xs-12'>" +
-                    "<input name=Alm-" + nutrientes[i].value + " type='number' class='form-control', step='0.01', data-parsley='number'" +
-                    "data-parsley-type-message='Preencha com um valor numérico', " +
-                    "data-parsley-required='data-parsley-required', data-parsley-required-message='Preencha este Campo!'>" +
-                    "</div>" +
-                    "<label for='alimento' class='control-label col-md-1 col-sm-3 col-xs-12 pull-left'>g</label>" +
-                    "</div>"
-                );
-            }
-        }
+        var $medidaSelect = $('#medidaCaseiraSelect');
+        $medidaSelect.on('select2:unselect', function(e) {
+            $("#Medida-"+ e.params.data.id).remove();
+        })
+        $medidaSelect.on('select2:select', function(e) {
+            $('#mdcase').append(
+                "<div id=Medida-"+ e.params.data.id +" class='form-group col-md-6 col-sm-6 col-xs-12'>" +
+                "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +
+                "<div class='col-md-4 col-sm-4 col-xs-12'>" +
+                "<input name=Alm-" + e.params.data.id + " type='number' class='form-control', step='0.01', data-parsley='number'" +
+                "data-parsley-type-message='Preencha com um valor numérico', " +
+                "data-parsley-required='data-parsley-required', data-parsley-required-message='Preencha este Campo!'>" +
+                "</div>" +
+                "<label for='alimento' class='control-label col-md-1 col-sm-3 col-xs-12 pull-left'>g</label>" +
+                "</div>"
+            );
+        })
     </script>
 @endsection

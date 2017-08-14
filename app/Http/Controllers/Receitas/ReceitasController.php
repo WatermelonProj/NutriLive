@@ -200,7 +200,7 @@ class ReceitasController extends Controller
             $alimentoReceita = new AlimentoReceita();
             $alimentoReceita->idAlimento = $alimento;
             $alimentoReceita->idReceita = $receita->idReceita;
-            $alimentoReceita->qtde = $request['Alm-'.$alimento];
+            $alimentoReceita->qtde = $request[$alimento];
             $alimentoReceita->unidadeMedida = 2;
             $alimentoReceita->save();
         }

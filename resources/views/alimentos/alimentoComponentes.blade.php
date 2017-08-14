@@ -41,7 +41,6 @@
                                             <span class="">
                                                 <i class="fa fa-flash fa-2x"></i> ENERGIA
                                                 = {{$nutrienteAlimento[0]['qtde']}} KCAL
-                                                = {{$nutrienteAlimento[1]['qtde']}} KJ
                                             </span>
                                         </div>
                                     </div>

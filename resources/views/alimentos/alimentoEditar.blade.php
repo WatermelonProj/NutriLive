@@ -67,7 +67,7 @@
                     <div class="form-group">
                         {!! Form::label('nutrientes', 'Nutrientes', ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::select('nutrientes[]', \App\Models\Nutriente\Nutriente::pluck('nomeNutriente', 'idNutriente'), $nutrientesContidos,
+                            {!! Form::select('nutrientes[]', $nutrientes, $nutrientesContidos,
                             ['id'=>'nutrienteSelect', 'class'=>'form-control select2_multiple', 'multiple'=>true, 'multiple'=>'multiple']) !!}
                         </div>
                     </div>
@@ -94,7 +94,8 @@
                     <div id="ntr">
                         @foreach($nutrientesAlimento as $nutrienteAlimento)
                             <div id="Nutriente-{{ $nutrienteAlimento->idNutriente }}" class='form-group col-md-6 col-sm-6 col-xs-12'>
-                                {!! Form::label('Ntr-'.$nutrienteAlimento->idNutriente, $nutriente->where('idNutriente', $nutrienteAlimento->idNutriente)->first()->nomeNutriente,
+                                <?php $nutrienteLabel = $nutriente->where('idNutriente', $nutrienteAlimento->idNutriente)->first() ?>
+                                {!! Form::label('Ntr-'.$nutrienteAlimento->idNutriente, $nutrienteLabel->nomeNutriente ." - ". $nutrienteLabel->unidadeMedida->siglaUnidade,
                                 ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                                 <div class='col-md-4 col-sm-4 col-xs-12'>
                                     {!! Form::text('Ntr-'.$nutrienteAlimento->idNutriente, $nutrienteAlimento->qtde,
@@ -117,7 +118,7 @@
                     <div id="mdcase">
                         @foreach($medidasAlimento as $medidaAlimento)
                             <div class='form-group col-md-6 col-sm-6 col-xs-12'>
-                                {!! Form::label('Alm-'.$medidaAlimento->idTMCaseira, $medidaCaseira->where('idTMCaseira', $medidaAlimento->idTMCaseira)->first()->nomeTMC,
+                                {!! Form::label('Alm-'.$medidaAlimento->idTMCaseira, $medidaCaseira->where('idTMCaseira', $medidaAlimento->idTMCaseira)->first()->nomeTMC ,
                                  ['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                                 <div class='col-md-4 col-sm-4 col-xs-12'>
                                     {!! Form::text('Alm-'.$medidaAlimento->idTMCaseira, $medidaAlimento->qtde,
@@ -181,7 +182,7 @@
 
             $('#mdcase').append(
                 "<div id=Medida-"+ e.params.data.id +" class='form-group col-md-6 col-sm-6 col-xs-12'>" +
-                "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +
+                "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + " - g</label>" +
                 "<div class='col-md-4 col-sm-4 col-xs-12'>" +
                 "<input name=Alm-" + e.params.data.id + " type='number' class='form-control', step='0.01', data-parsley='number'" +
                 "data-parsley-type-message='Preencha com um valor numérico', " +

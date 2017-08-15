@@ -160,6 +160,12 @@ class AlimentoController extends Controller
         $nutrientesAlimento = $alimento->nutrienteAlimento;
         $medidasAlimento = $alimento->alimentoMedidaCaseira;
 
+        $nutrientes = Nutriente::pluck('nomeNutriente', 'idNutriente');
+        foreach ($nutrientes as $index => $n) {
+            $aux = Nutriente::where('nomeNutriente', $n)->first()->unidadeMedida->siglaUnidade;
+            $nutrientes[$index] = $n . " " . $aux;
+        }
+
         // pega todos os nutrientes e medidas que um alimento possui para passar para a view
         $nutrientesContidos = $nutrientesAlimento->map(function ($ntr) {
             return $ntr->idNutriente;
@@ -173,7 +179,7 @@ class AlimentoController extends Controller
         $medidasContidas = $medidasContidas->toArray();
 
         return view('alimentos.alimentoEditar', compact('alimento', 'nutrientesContidos',
-            'medidasContidas', 'nutrientesAlimento', 'medidasAlimento', 'nutriente', 'medidaCaseira'));
+            'medidasContidas', 'nutrientesAlimento', 'medidasAlimento', 'nutriente', 'medidaCaseira', 'nutrientes'));
     }
 
     /**

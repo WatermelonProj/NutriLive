@@ -136,7 +136,6 @@
                     <div class="ln_solid"></div>
 
                     {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary pull-right']) !!}
-                    <button class="btn btn-danger pull-right" href="{{ route('alimentos') }}">Cancelar</button>
                     <a href="{{ route('alimentos') }}" class="btn btn-danger pull-right">Cancelar</a>
                     {!! Form::close() !!}
                 </div>

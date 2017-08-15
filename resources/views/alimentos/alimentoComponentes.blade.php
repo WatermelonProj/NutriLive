@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('links')
+    @include('imports.pnotify_links')
+@endsection
+
 @section('content')
     <div class="row">
         <div class="title_left">
@@ -219,8 +223,10 @@
 @section('scripts')
     @include('imports.datatables_script')
     @include('imports.morris_graphs')
+    @include('imports.pnotify_script')
 
     <script>
+
         function chart() {
             Morris.Donut({
                 element: 'graph_donut',
@@ -254,4 +260,20 @@
             atualizaNutrientes();
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            new PNotify({
+                title: 'Legenda',
+                text:
+                '100g - Os dados de nutrientes são baseados em 100g do alimentos<br>' +
+                'NA - Nutriente não existente no alimento<br>' +
+                'Tr - Quantidade muito baixa do nutriente(Insignificante para os cálculos',
+                type: 'info',
+                hide: false,
+                styling: 'bootstrap3'
+            })
+        });
+    </script>
+
 @endsection

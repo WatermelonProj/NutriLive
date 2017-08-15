@@ -8,7 +8,7 @@
           rel="stylesheet">
 @endsection
 
-@section('table_title', "Semanas")
+@section('table_title', "Informações Nutricionais de cada semana")
 
 @section('table_head')
     <th>Semana</th>

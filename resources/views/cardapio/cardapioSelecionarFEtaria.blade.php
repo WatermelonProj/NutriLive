@@ -51,8 +51,10 @@
                             '9' => 'Setembro',  '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'],
                              $mesAtual, ['class'=>'form-control']) !!}
                         </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            {!! Form::number('ano', \Carbon\Carbon::now()->year, ['class' => 'form-control', 'placeholder' => 'ano']) !!}
+                        </div>
                     </div>
-
                     <div class="clearfix"></div>
                     <div class="ln_solid"></div>
 

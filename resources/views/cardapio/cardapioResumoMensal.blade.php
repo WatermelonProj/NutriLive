@@ -8,7 +8,7 @@
           rel="stylesheet">
 @endsection
 
-@section('table_title', "DD/MM/YYYY")
+@section('table_title', "Informações Nutricionais de cada dia")
 
 @section('table_head')
     <th>DIA</th>

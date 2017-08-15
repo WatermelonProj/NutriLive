@@ -210,7 +210,7 @@ class CardapioController extends Controller
     public function total(Request $request)
     {
         // retornando somente os dias do mês solicitado
-        $cardapios = Cardapio::CardapioMensal($request->mes)->where('idFEtaria', $request->faixaEtaria)
+        $cardapios = Cardapio::CardapioMensal($request->mes, $request->ano)->where('idFEtaria', $request->faixaEtaria)
             ->orderBy('dataUtilizacao', 'asc')->get();
 
         //retornando as quantidades minimas

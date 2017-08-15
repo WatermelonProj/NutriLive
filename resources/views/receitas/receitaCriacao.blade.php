@@ -86,7 +86,7 @@
     </h2>
 
     <div id="alm">
-        <div class="alert alert-warning alert-dismissible fade in " role="alert">
+        <div id="alm-alert" class="alert alert-warning alert-dismissible fade in " role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">×</span>
             </button>
@@ -97,26 +97,26 @@
     <div class="clearfix"></div>
     <div class="ln_solid"></div>
     {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary pull-right']) !!}
+    <a href="{{ route('receitas') }}" class="btn btn-danger pull-right">Cancelar</a>
     {!! Form::close() !!}
 @endsection
 
 @section('form_scripts')
     <script>
-
         var $eventSelect = $('#mselect');
         $eventSelect.on('select2:unselect', function(e) {
-            $eventSelect.parent().parent().remove();
+            $('#'+e.params.data.id).parent().parent().remove();
         })
         $eventSelect.on('select2:select', function(e) {
-//            console.log('select');
-//            console.log(e.params.data.id); //This will give you the id of the selected attribute
-//            console.log(e.params.data.text); //This will give you the text of the selected
+            if ($('#alm-alert').length === 1)
+                $('#alm').empty();
+
             $('#alm').append(
                 "<div class='form-group col-md-6 col-sm-6 col-xs-12'>" +
                 "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +
                 "<div class='col-md-4 col-sm-4 col-xs-12'>" +
-                "<input name="+e.params.data.id+" type='number' class='form-control', step='0.01', data-parsley='number'" +
-                "data-parsley-type-message='Preencha com um valor numérico', " +
+                "<input name="+e.params.data.id+" id="+e.params.data.id+" type='number' class='form-control'," +
+                " step='0.01', data-parsley='number'" + "data-parsley-type-message='Preencha com um valor numérico', " +
                 "data-parsley-required='data-parsley-required', data-parsley-required-message='Preencha este Campo!'>" +
                 "</div>" +
                 "<label for='alimento' class='control-label col-md-1 col-sm-3 col-xs-12 pull-left'>g</label>" +

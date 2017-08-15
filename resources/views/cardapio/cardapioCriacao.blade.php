@@ -52,7 +52,9 @@
 
     </div>
 
+
     {!! Form::submit('Salvar', ['class'=>'btn btn-primary pull-right']) !!}
+    <a href="{{ route('cardapio') }}" class="btn btn-danger pull-right">Cancelar</a>
     {!! Form::close() !!}
 @endsection
 
@@ -89,23 +91,22 @@
     </script>
 
     <script>
-        $('#mselect').change(addDate);
+        var $eventSelect = $('#mselect');
 
-        {{-- adiciona dinâmicamente o campo para valores dos alimentos --}}
-        function addDate() {
-            var refeicoes = $('#mselect').find(":selected");
-            $('#date').empty();
-            for (i = 0; i < refeicoes.length; i++) {
-                $('#date').append(
-                    "<div class=\'form-group col-md-6 col-sm-6 col-xs-12\'>\n    " +
-                    "<label for=\'refeicao\' class=\'control-label col-md-3 col-sm-3 col-xs-12\'>" + refeicoes[i].text + "</label>\n    " +
-                    "<div class=\'col-md-4 col-sm-4 col-xs-12\'>\n        " +
-                    "<input name=" + refeicoes[i].value + " type=\'text\' class=\'form-control\'"  +
-                    " placeholder=\'HH:MM\'\n               pattern=\'[0-9][0-9]:[0-9][0-9]\' data-parsley-required data-parsley-pattern-message=\'Insira a hora no seguinte formato : Hora/Minuto(s)\'>\n    " +
-                    "</div>\n" +
-                    "</div>"
-                );
-            }
-        }
+        $eventSelect.on('select2:unselect', function(e) {
+            $eventSelect.parent().parent().remove();
+        });
+
+        $eventSelect.on('select2:select', function(e) {
+            $('#date').append(
+                "<div class=\'form-group col-md-6 col-sm-6 col-xs-12\'>\n    " +
+                "<label for=\'refeicao\' class=\'control-label col-md-3 col-sm-3 col-xs-12\'>" + e.params.data.text + "</label>\n    " +
+                "<div class=\'col-md-4 col-sm-4 col-xs-12\'>\n        " +
+                "<input name=" + e.params.data.id + " type=\'text\' class=\'form-control\'"  +
+                " placeholder=\'HH:MM\'\n pattern=\'[0-9][0-9]:[0-9][0-9]\' data-parsley-required data-parsley-pattern-message=\'Insira a hora no seguinte formato : Hora/Minuto(s)\'>\n    " +
+                "</div>\n" +
+                "</div>"
+            );
+        });
     </script>
 @endsection

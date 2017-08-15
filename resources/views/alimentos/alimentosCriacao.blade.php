@@ -92,8 +92,7 @@
                         <small>Insira as quantidades</small>
                     </h2>
                     <div id="ntr">
-                        <div class="alert alert-warning alert-dismissible fade in" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        <div id="ntr-alert" class="alert alert-warning alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                         aria-hidden="true">×</span>
                             </button>
                             <strong>Atenção!</strong> Você ainda não inseriu nenhum Nutriente ao alimento.
@@ -109,7 +108,7 @@
                     </h2>
                     <div id="mdcase">
                         <div id="ntr">
-                            <div class="alert alert-warning alert-dismissible fade in " role="alert">
+                            <div id="md-alert" class="alert alert-warning alert-dismissible fade in " role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                             aria-hidden="true">×</span>
                                 </button>
@@ -122,6 +121,8 @@
                     <div class="ln_solid"></div>
 
                     {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary pull-right']) !!}
+                    <button class="btn btn-danger pull-right" href="{{ route('alimentos') }}">Cancelar</button>
+                    <a href="{{ route('alimentos') }}" class="btn btn-danger pull-right">Cancelar</a>
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -140,9 +141,9 @@
             $("#Nutriente-"+ e.params.data.id).remove();
         })
         $eventSelect.on('select2:select', function(e) {
-//            console.log('select');
-//            console.log(e.params.data.id); //This will give you the id of the selected attribute
-//            console.log(e.params.data.text); //This will give you the text of the selected
+            if ($('#ntr-alert').length === 1)
+                $('#ntr').empty();
+
             $('#ntr').append(
                 "<div id=Nutriente-"+ e.params.data.id +" class='form-group col-md-6 col-sm-6 col-xs-12'>" +
                 "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +
@@ -160,6 +161,9 @@
             $("#Medida-"+ e.params.data.id).remove();
         })
         $medidaSelect.on('select2:select', function(e) {
+            if ($('#md-alert').length === 1)
+                $('#mdcase').empty();
+
             $('#mdcase').append(
                 "<div id=Medida-"+ e.params.data.id +" class='form-group col-md-6 col-sm-6 col-xs-12'>" +
                 "<label for='alimento' class='control-label col-md-3 col-sm-3 col-xs-12'>" + e.params.data.text + "</label>" +

@@ -30,6 +30,7 @@
     <div class="clearfix"></div>
     <div class="ln_solid"></div>
     {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary pull-right']) !!}
+    <a href="{{ route('refeicao') }}" class="btn btn-danger pull-right">Cancelar</a>
     {!! Form::close() !!}
 @endsection
 

@@ -58,7 +58,6 @@ class AlimentoController extends Controller
      */
     public function store(Request $request)
     {
-
         //validação do cadastro de alimentos
         $this->validate($request,
             [
@@ -84,17 +83,20 @@ class AlimentoController extends Controller
         }
 
         // garantindo a energia = 0 pelo menos
-        $nutrienteAlm = new NutrienteAlimento();
-        $nutrienteAlm->alimento()->associate($alimento);
-        $nutrienteAlm->idNutriente = 1;
-        $nutrienteAlm->qtde = 0;
-        $nutrienteAlm->save();
-        $nutrienteAlm = new NutrienteAlimento();
-        $nutrienteAlm->alimento()->associate($alimento);
-        $nutrienteAlm->idNutriente = 2;
-        $nutrienteAlm->qtde = 0;
-        $nutrienteAlm->save();
-
+        if (!$request->has('Ntr-1')) {
+            $nutrienteAlm = new NutrienteAlimento();
+            $nutrienteAlm->alimento()->associate($alimento);
+            $nutrienteAlm->idNutriente = 1;
+            $nutrienteAlm->qtde = 0;
+            $nutrienteAlm->save();
+        }
+        if (!$request->has('Ntr-2')) {
+            $nutrienteAlm = new NutrienteAlimento();
+            $nutrienteAlm->alimento()->associate($alimento);
+            $nutrienteAlm->idNutriente = 2;
+            $nutrienteAlm->qtde = 0;
+            $nutrienteAlm->save();
+        }
 
         // Associando os nutrientes com o alimento criado previamente
         if ($request->nutrientes) {
@@ -215,18 +217,21 @@ class AlimentoController extends Controller
         DB::delete("delete FROM nutrienteAlimento WHERE idAlimento = ?", [$alimento->idAlimento]);
         DB::delete("delete FROM alimento_medidaCaseira WHERE idAlimento = ?", [$alimento->idAlimento]);
 
-
         // garantindo a energia = 0 pelo menos
-        $nutrienteAlm = new NutrienteAlimento();
-        $nutrienteAlm->alimento()->associate($alimento);
-        $nutrienteAlm->idNutriente = 1;
-        $nutrienteAlm->qtde = 0;
-        $nutrienteAlm->save();
-        $nutrienteAlm = new NutrienteAlimento();
-        $nutrienteAlm->alimento()->associate($alimento);
-        $nutrienteAlm->idNutriente = 2;
-        $nutrienteAlm->qtde = 0;
-        $nutrienteAlm->save();
+        if (!$request->has('Ntr-1')) {
+            $nutrienteAlm = new NutrienteAlimento();
+            $nutrienteAlm->alimento()->associate($alimento);
+            $nutrienteAlm->idNutriente = 1;
+            $nutrienteAlm->qtde = 0;
+            $nutrienteAlm->save();
+        }
+        if (!$request->has('Ntr-2')) {
+            $nutrienteAlm = new NutrienteAlimento();
+            $nutrienteAlm->alimento()->associate($alimento);
+            $nutrienteAlm->idNutriente = 2;
+            $nutrienteAlm->qtde = 0;
+            $nutrienteAlm->save();
+        }
 
         // Editando um alimento
         foreach ($request->nutrientes as $nutriente) {

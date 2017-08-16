@@ -162,6 +162,39 @@
                                     </div>
                                 </div>
                             </div>
+                            {{--Medidas Caseiras--}}
+                            @if(sizeof($medidasCaseiras) > 0)
+                                <div class="panel">
+                                <a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse"
+                                   data-parent="#accordion" href="#collapseFive" aria-expanded="false"
+                                   aria-controls="collapseFive">
+                                    <h4 class="panel-title">Medidas Caseiras</h4>
+                                </a>
+                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingFive">
+                                    <div class="panel-body">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>Tipo de Medida</th>
+                                                <th>Quantidade</th>
+                                                <th>Unidade</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($medidasCaseiras as $medida)
+                                                    <tr>
+                                                        <td>{{ $medida->tipoMedidaCaseira->nomeTMC }}</td>
+                                                        <td>{{ $medida->qtde }}</td>
+                                                        <td>{{ $medida->unidadeMedida->siglaUnidade }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         </div>
 
                     </div>
@@ -241,24 +274,6 @@
 
         chart();
 
-        var medidaAtual = 100;
-
-        function atualizaNutrientes() {
-            var qtd = $('.qtd');
-            $.each(qtd, function (i, key) {
-                if (key.text != 'NA' && key.text != "Tr") {
-                    var vlr = (parseFloat($(key).text()) / medidaAtual)
-                        * parseFloat($('select[name=selector]').val());
-                    $(key).text(vlr.toFixed(2));
-                }
-            });
-            medidaAtual = parseFloat($('select[name=selector]').val());
-        }
-
-        $('#atualizaNutr').click(function () {
-            //console.log($('select[name=selector]').val())
-            atualizaNutrientes();
-        });
     </script>
 
     <script>

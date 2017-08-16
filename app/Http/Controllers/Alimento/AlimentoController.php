@@ -141,11 +141,13 @@ class AlimentoController extends Controller
         $nutrientes = Nutriente::all();
         $nutrienteAlimento = NutrienteAlimento::where('idAlimento', $id)->get();
 
+        $medidasCaseiras = $alimento->alimentoMedidaCaseira;
+
         // unidade da medida
         $unidade = UnidadeMedida::all();
 
         return view('alimentos.alimentoComponentes', compact('alimento', 'img', 'nutrientes',
-            'nutrienteAlimento', 'unidade'));
+            'nutrienteAlimento', 'unidade', 'medidasCaseiras'));
     }
 
     /**

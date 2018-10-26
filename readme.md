@@ -1,6 +1,6 @@
 # NutriLive by Watermelon Project
 
-Espanol:
+Português:
 
 Sistema de Nutrição Escolar, com o intuito de auxiliar nutricionistas a criar, agendar cardápios para escolas, retornando informações sobre os mesmos. 
 
